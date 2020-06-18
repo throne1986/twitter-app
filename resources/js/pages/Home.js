@@ -106,26 +106,7 @@ class Home extends Component {
       <div>
         <div className="d-flex flex-column flex-md-row align-items-md-center py-5">
           <div className="container">
-            <div className="row">
-              <div className="section-about col-lg-6 mb-4 mb-lg-0">
-                <div>
-                  <h2>Example To Do App</h2>
-                  <p>
-                    Built with Laravel and React. Includes JWT auth,
-                    registration, login, routing and tests.
-                    {' '}
-                    <a href="https://wptheming.com/2019/02/building-a-react-app-on-laravel/">
-                      Learn more
-                    </a>
-                    .
-                  </p>
-                  <p>
-                    <a href="https://github.com/devinsays/laravel-react-bootstrap">
-                      Source code and documentation on GitHub.
-                    </a>
-                  </p>
-                </div>
-              </div>
+            <div className="row login">
               <div className="section-login col-lg-6">
                 <h4>Log in to the App</h4>
 

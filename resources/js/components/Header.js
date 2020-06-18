@@ -20,9 +20,9 @@ class Header extends Component {
 
   render() {
     return (
-      <header className="d-flex align-items-center justify-content-between">
+      <header className="container d-flex align-items-center justify-content-between">
         <h1 className="logo my-0 font-weight-normal h4">
-          <Link to="/">Laravel React</Link>
+          <Link to="/">Twitter Like</Link>
         </h1>
 
         {this.props.isAuthenticated && (
