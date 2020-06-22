@@ -21,6 +21,7 @@ const authLogin = (state, payload) => {
     ...state,
     isAuthenticated: true,
     user,
+    comments
   };
   return stateObj;
 };

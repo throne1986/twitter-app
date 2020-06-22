@@ -4,8 +4,9 @@ import * as ActionTypes from '../action-types'
 const initialState ={
     data:[],
     error:'',
-    comments:null,
-    loading:false
+    comments:[],
+    loading:false,
+    editing:false
 }
 
 const reducer = (state= initialState, action) => {
@@ -31,16 +32,26 @@ const reducer = (state= initialState, action) => {
         case ActionTypes.ADD_COMMENTS:
             return{
                 ...state,
-                comments:state.comments.concat(action.payload)
+              comments:state.comments.concat(action.payload)
             }
             
-            case ActionTypes.DELETE_COMMENTS:
+        case ActionTypes.DELETE_COMMENTS:
                 return{
                     ...state,
-                comments:state.comments.filter(comment =>comment.id !==action.payload)
+                    comments: state.comments.filter(comment =>comment.id !==action.payload)
         
                 }
-        default:
-            state;
+        case ActionTypes.EDIT_COMMENTS:
+            return{
+                 ...state,
+                 comments: state.comments.map(comment =>comment.id === action.payload?{
+                     
+                     ...comment,
+                     editing:!editing
+                 }:comment)
+            }
+            default: // need this for default case
+                    return state 
     }
 }
+export default reducer

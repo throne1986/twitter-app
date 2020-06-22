@@ -1,5 +1,5 @@
 import * as ActionTypes from '../action-types';
-import axios from '../../Http';
+import axios from 'axios';
 
 export function authLogin(payload) {
   return {
@@ -28,7 +28,7 @@ export function fetchUserRequest(){
 }
 export function fetchUserSucces(){
   return{
-    type: ActionTypes.FETCH_USER_SUCCES,
+    type: ActionTypes.FETCH_USER_SUCCESS,
     payload:comments   
   }
 }
@@ -40,20 +40,20 @@ export function fetchUserFailure(){
 }
 
 // actions creators for comments
-export const addComments = data =>{
+export const addComment = data =>{
   return{
     type:ActionTypes.ADD_COMMENTS,
     payload:data
   }
 }
-export const editUser = id =>{
+export const editComment= id =>{
   return{
     type: ActionTypes.EDIT_COMMENTS,
     payload:id
   }
 }
 
-export const deleteUser = id =>{
+export const removeComment = id =>{
   return{
     type: ActionTypes.DELETE_COMMENTS,
     payload:id
@@ -61,14 +61,14 @@ export const deleteUser = id =>{
 }
 
 // retriev comments
-export const fetchComments=(dispatch) =>{
-
+export const fetchComments= () =>{
+console.log('Fetching data from api')
   return dispatch =>{
     dispatch(fetchCommentsRequest);
-    axios.get('api/v1/todo')
+    axios.get('/api/v1/todo/')
     .then(response =>{
       const comments =response.data;
-      console.log(comments)
+      console.log("comments from api", comments);
       dispatch(fetchCommentsSucces(comments))
     })
     .catch(error =>{
@@ -80,12 +80,12 @@ export const fetchComments=(dispatch) =>{
 }
 
 //adding comments
-export const addNewComments = data =>{
+export const addNewComment = data =>{
   return dispatch =>{
     dispatch()
-    axios.post('api/v1/todo')
+    axios.post('/api/v1/todo')
     .then(response =>{
-      dispatch(addComments(data))
+      dispatch(addComment(data))
     })
     .catch(error =>{
       const erroMsg =error.message
@@ -96,14 +96,14 @@ export const addNewComments = data =>{
 }
 
 // update comments
-export const updateComments = data =>{
+export const updateComment = data =>{
   return dispatch =>{
     dispatch(fetchCommentsRequest)
-    axios.put(`api/v1/todo/${data.id}`)
+    axios.put(`/api/v1/todo/${data.id}`)
     .then(response =>{
       const comments =response.data
       console.log("comments:", comments)
-      dispatch(editComments(data.id))
+      dispatch(editComment(data.id))
     })
     .catch(error =>{
       const erroMsg =error.message;
@@ -114,11 +114,11 @@ export const updateComments = data =>{
 
 // delete comments
 
-export const deleteUser = id =>{
+export const deleteComment = id =>{
   return dispatch =>{
-    axios.delete(`api/v1/todo/${id}`)
+    axios.delete(`/api/v1/todo/${id}`)
     .then(response =>{
-      dispatch(deleteUser(id))
+      dispatch(deleteComment(id))
     })
     .catch(error =>{
       const erroMsg =error.message;

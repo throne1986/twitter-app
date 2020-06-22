@@ -1,9 +1,33 @@
-import React from 'react'
+import React, {useEffect, useState}from 'react'
+import { fetchComments, addComment, editComment, deleteComment } from '../store/actions'
 import heart from '../assets/images/heart.png'
 import shareIcon from '../assets/images/share-symbol.png'
+import { connect } from "react-redux";
+import axios from 'axios';
 
-function Dashboard() {
+
+
+function Dashboard(userComments) {
+
+  useEffect(() =>{
+    fetchComments();
+  }, [fetchComments])
+
+  // useEffect(() => {
+    
+  //   axios.get('/api/v1/todo')
+  //   .then(response =>{
+  //     const comments =response.data
+  //     console.log("data from api", comments);
+  //   })
+  //   .catch(error =>{
+  //     const erroMsg =error.message;
+  //     console.log(erroMsg)
+  //   })
+  // }, [])
+
   return (
+   
     <div>
      <div className="container main-block">
   
@@ -64,6 +88,16 @@ function Dashboard() {
                   </div>
                   <div className="comments_text">
                     <p>testa </p>
+                    <ul>
+                      {
+                       
+                        userComments && userComments.comments && userComments.comments.map(comment =>{
+                          <li key={comment.id}>
+                              {comment.comments}
+                          </li>
+                        })
+                    }
+                    </ul>
                   </div>
                   <div className="comments_edit-delete">
                     <button className="btn-danger">Delete</button>
@@ -89,4 +123,25 @@ function Dashboard() {
   )
 }
 
-export default Dashboard
+const mapStateToProps = state => {
+  console.log("I am state", state);
+  return {
+    isAuthenticated: state.Auth.isAuthenticated,
+    user: state.Auth.user,
+    userComments: state.comments
+  };
+};
+
+const mapDispatchToProps = dispatch => {
+  return {
+    fetchComments: () => dispatch(fetchComments()),
+  
+  };
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Dashboard);
+
+
