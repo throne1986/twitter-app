@@ -20,7 +20,7 @@ const reducer = (state= initialState, action) => {
             return{
                 ...state,
                 loading:false,
-                comments:state.action.payload,
+                comments:action.payload,
                 error:''
             }
         case ActionTypes.FETCH_COMMENTS_FAILURE:

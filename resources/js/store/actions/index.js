@@ -27,14 +27,36 @@ export function fetchUserRequest(){
   }
 }
 export function fetchUserSucces(){
+  console.log('success')
   return{
     type: ActionTypes.FETCH_USER_SUCCESS,
-    payload:comments   
+    payload:user  
   }
 }
 export function fetchUserFailure(){
   return{
     type: ActionTypes.FETCH_USER_FAILURE,
+    payload:error
+  }
+}
+
+
+// actions creators for  comments
+export function fetchCommentsRequest(){
+  return{
+    type: ActionTypes.FETCH_COMMENTS_REQUEST,
+  }
+}
+export function fetchCommentsSucces(){
+  console.log('success')
+  return{
+    type: ActionTypes.FETCH_COMMENTS_SUCCESS,
+    payload:user  
+  }
+}
+export function fetchCommentsFailure(){
+  return{
+    type: ActionTypes.FETCH_COMMENTS_FAILURE,
     payload:error
   }
 }
@@ -65,7 +87,7 @@ export const fetchComments= () =>{
 console.log('Fetching data from api')
   return dispatch =>{
     dispatch(fetchCommentsRequest);
-    axios.get('/api/v1/todo/')
+    axios.get('/api/v1/todo')
     .then(response =>{
       const comments =response.data;
       console.log("comments from api", comments);
@@ -79,6 +101,17 @@ console.log('Fetching data from api')
   }
 }
 
+export const loadData =(dispatch) => { // needs to dispatch, so it is first argument
+  return axios.get('/api/v1/todo')
+    .then(response =>{
+      const comments =response.data
+      console.log("data from api", comments)
+    })
+    .then(
+      data => dispatch(fetchUserSucces),
+      err => dispatch(fetchCommentsFailure)
+    );
+}
 //adding comments
 export const addNewComment = data =>{
   return dispatch =>{

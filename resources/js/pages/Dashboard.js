@@ -1,5 +1,5 @@
 import React, {useEffect, useState}from 'react'
-import { fetchComments, addComment, editComment, deleteComment } from '../store/actions'
+import { fetchComments,loadData, addComment, editComment, deleteComment } from '../store/actions'
 import heart from '../assets/images/heart.png'
 import shareIcon from '../assets/images/share-symbol.png'
 import { connect } from "react-redux";
@@ -11,7 +11,8 @@ function Dashboard(userComments) {
 
   useEffect(() =>{
     fetchComments();
-  }, [fetchComments])
+    loadData()
+  }, [])
 
   // useEffect(() => {
     
@@ -34,7 +35,7 @@ function Dashboard(userComments) {
         <div className="profile">
           <div className="profile_card card">
             <div className="profile_btn-share">
-              <a href="#" target="_blank" onClick="window.open(this.href,'targetWindow','toolbar=no,location=0,status=no,menubar=no,scrollbars=yes,resizable=yes,width=600,height=1200'); return false">
+              <a href="#" target="_blank">
                 <button type="button" className="btn-share">
                   <img src={shareIcon} />
                 </button>
