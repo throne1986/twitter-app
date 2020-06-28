@@ -36,11 +36,13 @@ const reducer = (state= initialState, action) => {
             }
             
         case ActionTypes.DELETE_COMMENTS:
+            console.log('acc',action)
                 return{
                     ...state,
                     comments: state.comments.filter(comment =>comment.id !==action.payload)
         
                 }
+                console.log('acc0', ddddd);
         case ActionTypes.EDIT_COMMENTS:
             return{
                  ...state,

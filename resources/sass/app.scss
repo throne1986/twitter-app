@@ -3,7 +3,12 @@
 @import "breakpoint";
 // Bootstrap
 @import '~bootstrap/scss/bootstrap';
+
 // General
+.App {
+    text-align: center;
+    padding-top: 2rem;
+  }
 img {
     max-width: 100%;
     height: auto;
@@ -232,6 +237,7 @@ header {
         right: 9px;
         font-weight: $base-font-weight;
     }
+
     /*
     hr.comments_line {
         border: 1px solid #EBEBEB;
@@ -243,7 +249,7 @@ header {
     #description {
         border: none;
         resize: none;
-        border-bottom: 4px solid #DBE0E8;
+        // border-bottom: 4px solid #DBE0E8;
         font-size: 30px;
         overflow: hidden;
         outline: none;
@@ -251,9 +257,9 @@ header {
         box-shadow: none;
     }
     .add-comments {
-        padding: 47px;
+        width:100%;
+        padding: 0px 47px;
         margin-top: 23px;
-        border: 2px solid #EBEBEB;
     }
     .photo {
         img {
@@ -298,24 +304,7 @@ header {
         justify-content: space-between;
         padding: 0px 18px 20px 0px;
     }
-    li {
-        display: -webkit-inline-box;
-        display: -ms-inline-flexbox;
-        display: inline-flex;
-        -webkit-box-flex: 1;
-        -ms-flex: 1 1 auto;
-        flex: 1 1 auto;
-        -webkit-box-orient: horizontal;
-        -webkit-box-direction: normal;
-        -ms-flex-flow: row wrap;
-        flex-flow: row wrap;
-        -webkit-box-align: center;
-        -ms-flex-align: center;
-        align-items: center;
-        position: relative;
-        font-family: sans-serif;
-        padding: 0px 20px 20px 20px;
-    }
+    
     li:not(:last-child):after {
         content: '';
         display: block;
@@ -331,9 +320,10 @@ header {
         display: -webkit-box;
         display: -ms-flexbox;
         display: flex;
-        -webkit-box-flex: 1;
-        -ms-flex: 1 100%;
-        flex: 1 100%;
+        // -webkit-box-flex: 1;
+        // -ms-flex: 1 100%;
+        // flex: 1 100%;
+        margin: 0px 12px;
         -webkit-box-pack: center;
         -ms-flex-pack: center;
         justify-content: center;
@@ -365,7 +355,6 @@ header {
         justify-content: center;
         padding: 7px 15px;
         margin: 0 3px;
-        height: 92px;
         width: 268px;
         cursor: pointer;
     }
@@ -403,18 +392,20 @@ header {
         .comments_count {
             padding-left: 6px;
         }
-        .comments_edit-delete{
+        .comments_icons{
             border: none;
             text-decoration: underline;
             border: none;
             background-color: white;
             cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            margin: 20px 0px;
             font-size: $desktop-base-font-size;
             color: $button-color;
             letter-spacing: 0;
             outline: none;
             cursor: pointer;
-            margin: 50px 20px 0px;
             & button{
                 margin:15px;
             }
@@ -464,7 +455,7 @@ header {
         align-items: center;
         -webkit-box-pack: justify;
         -ms-flex-pack: justify;
-        justify-content: space-between;
+        // justify-content: space-between;
         margin-top: 27px;
         h1 {
             font-size: $desktop-base-font-size;
@@ -651,4 +642,76 @@ header {
     .btn-follow {
         width: 92%;
     }
+}
+
+.profile_card-bottom >li {
+    display: -webkit-inline-box;
+    display: -ms-inline-flexbox;
+    display: inline-flex;
+    -webkit-box-flex: 1;
+    -ms-flex: 1 1 auto;
+    flex: 1 1 auto;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+    -ms-flex-flow: row wrap;
+    flex-flow: row wrap;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    position: relative;
+    font-family: sans-serif;
+    padding: 0px 20px 20px 20px;
+}
+.comment_reply, .comment_edit, .comment_likes, .comment_retweet,.comment_options, .comment_delete, .tweet_harmonogram_icons, .tweet-image_icons, .tweet-quiz_icons, .tweet_emoji_icons, .tweet-gif_icons{
+    width:24px;
+    height: 24px;
+    fill: #c1c1c1;
+    margin: 10px;
+    cursor: pointer;
+}
+.tweet_submit-icons{
+    background-color: #1da1f2;
+    border-radius: 50px;
+    border: none;
+    outline: none;
+    font-size: 12px;
+    letter-spacing: 1px;
+    color: #FFFFFF;
+    font-weight: 600;
+    display: flex;
+    justify-content: center;
+    padding: 7px 15px;
+    margin: 0 3px;
+}
+.tweet_top{
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+.user_icon{
+    width:20%;
+}
+.tweet{
+    margin:85px 0px;
+}
+.tweet_bottom{
+    display: flex;
+    justify-content: space-around;
+}
+
+
+.modal-twitter{
+    position: fixed;
+    top: 26%;
+    left: 64%;
+    z-index: 1050;
+    width: 30%;
+    height: 30%;
+    overflow: hidden;
+    outline: 0;
+}
+
+
+.delele_data{
+    cursor: pointer;
 }

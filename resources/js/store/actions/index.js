@@ -42,19 +42,18 @@ export function fetchUserFailure(){
 
 
 // actions creators for  comments
-export function fetchCommentsRequest(){
+export const fetchCommentsRequest = () =>{
   return{
     type: ActionTypes.FETCH_COMMENTS_REQUEST,
   }
 }
-export function fetchCommentsSucces(){
-  console.log('success')
+export const fetchCommentsSucces = comments =>{
   return{
     type: ActionTypes.FETCH_COMMENTS_SUCCESS,
-    payload:user  
+    payload:comments 
   }
 }
-export function fetchCommentsFailure(){
+export const fetchCommentsFailure = error =>{
   return{
     type: ActionTypes.FETCH_COMMENTS_FAILURE,
     payload:error
@@ -84,33 +83,18 @@ export const removeComment = id =>{
 
 // retriev comments
 export const fetchComments= () =>{
-console.log('Fetching data from api')
   return dispatch =>{
-    dispatch(fetchCommentsRequest);
+    dispatch(fetchCommentsRequest()); //<-----call the fuction
     axios.get('/api/v1/todo')
     .then(response =>{
       const comments =response.data;
-      console.log("comments from api", comments);
       dispatch(fetchCommentsSucces(comments))
     })
     .catch(error =>{
-      const erroMsg =errors.messages
-      console.log(erroMsg);
-      dispatch(fetchCommentsFailure(error))
+      const erroMsg =error.message;
+      dispatch(fetchCommentsFailure(erroMsg))
     })
   }
-}
-
-export const loadData =(dispatch) => { // needs to dispatch, so it is first argument
-  return axios.get('/api/v1/todo')
-    .then(response =>{
-      const comments =response.data
-      console.log("data from api", comments)
-    })
-    .then(
-      data => dispatch(fetchUserSucces),
-      err => dispatch(fetchCommentsFailure)
-    );
 }
 //adding comments
 export const addNewComment = data =>{
@@ -148,13 +132,18 @@ export const updateComment = data =>{
 // delete comments
 
 export const deleteComment = id =>{
+  console.log('ids', id);
+  debugger
   return dispatch =>{
+    dispatch(fetchCommentsRequest())
     axios.delete(`/api/v1/todo/${id}`)
     .then(response =>{
-      dispatch(deleteComment(id))
+      console.log('yeees mom', response.data)
+      dispatch(removeComment(id))
     })
     .catch(error =>{
       const erroMsg =error.message;
+      console.log('eeeror', erroMsg)
       dispatch(fetchCommentsFailure(erroMsg))
     })
   }
